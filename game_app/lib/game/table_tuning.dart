@@ -12,5 +12,7 @@ class TableTuning {
   static const double bumperMinimumOutwardSpeed = 8.0;
   static const double slingshotImpulse = 3.2;
   static const double slingshotMinimumOutwardSpeed = 10.0;
+  static const double rampMinimumExitSpeed = 7.0;
+  static const double rampTraversalTimeout = 2.5;
   static const double railRestitution = 0.76;
 }

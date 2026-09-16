@@ -95,12 +95,11 @@ class PinballWorld extends Forge2DWorld {
     add(TableDecorations());
     add(TableBoundaries());
     add(DoghouseLane(this));
-    add(
-      BoneRamp(
-        start: Vector2(4.5, 45.0),
-        end: Vector2(7.0, 12.5),
-        accentColor: const Color(0xFFD4473F),
-      ),
+    _addBoneRamp(
+      id: 'ramp_a_bone_lane',
+      start: Vector2(4.5, 45.0),
+      end: Vector2(7.0, 12.5),
+      accentColor: const Color(0xFFD4473F),
     );
     add(
       HydrantSpinner(
@@ -149,12 +148,11 @@ class PinballWorld extends Forge2DWorld {
         },
       ),
     );
-    add(
-      BoneRamp(
-        start: Vector2(22.5, 12.5),
-        end: Vector2(27.8, 45.0),
-        accentColor: const Color(0xFF317BD0),
-      ),
+    _addBoneRamp(
+      id: 'ramp_b_return_lane',
+      start: Vector2(22.5, 12.5),
+      end: Vector2(27.8, 45.0),
+      accentColor: const Color(0xFF317BD0),
     );
     add(ball);
     add(leftFlipper);
@@ -386,6 +384,35 @@ class PinballWorld extends Forge2DWorld {
         },
       ),
     );
+  }
+
+  void _addBoneRamp({
+    required String id,
+    required Vector2 start,
+    required Vector2 end,
+    required Color accentColor,
+  }) {
+    final ramp = BoneRamp(
+      id: id,
+      start: start,
+      end: end,
+      accentColor: accentColor,
+      onCompleted: _onRampCompleted,
+      onTimedOut: (ramp, ball) {
+        telemetry.record('ramp_timeout');
+      },
+    );
+    add(ramp);
+    add(BoneRampSensor(ramp: ramp, position: start, isEntry: true));
+    add(BoneRampSensor(ramp: ramp, position: end, isEntry: false));
+  }
+
+  void _onRampCompleted(BoneRamp ramp, TennisBall ball) {
+    addScore(ramp.scoreValue);
+    audio.play(PinballSound.target);
+    haptics.medium();
+    telemetry.record('ramp_completed', value: ramp.scoreValue);
+    _shake(intensity: 0.13);
   }
 
   void unlockAchievement(PinballAchievement achievement, String message) {

@@ -431,22 +431,29 @@ Ramps must be implemented as real routes with a defined entry, travel path, exit
 
 ### Step 8.1 — Define ramp contracts
 
-- [ ] Define each ramp ID, entrance region, travel path, exit region, and score.
-- [ ] Define whether the ramp is a physical channel, a sensor-guided route, or a controlled transfer.
-- [ ] Define whether a ball can enter from both directions.
-- [ ] Define the failure behavior when a ball misses the entrance.
-- [ ] Define the maximum occupancy and anti-stuck timeout.
+- [x] Define each ramp ID, entrance region, travel path, exit region, and score.
+- [x] Define whether the ramp is a physical channel, a sensor-guided route, or a controlled transfer.
+- [x] Define whether a ball can enter from both directions.
+- [x] Define the failure behavior when a ball misses the entrance.
+- [x] Define the maximum occupancy and anti-stuck timeout.
 
 **Done when:** every ramp has a one-page behavior specification before art is finalized.
 
+**Current source contract:**
+
+| Ramp ID | Entrance | Travel path | Exit | Route | Direction | Score | Missed-entry behavior | Occupancy / timeout |
+|---|---|---|---|---|---|---:|---|---|
+| `ramp_a_bone_lane` | `(4.5, 45.0)` | physical two-rail channel to `(7.0, 12.5)` | upper playfield | `physicalChannel` | entrance-to-exit only | 500 | Ball stays under normal table physics and may retry | 1 ball / 2.5 seconds |
+| `ramp_b_return_lane` | `(22.5, 12.5)` | physical two-rail channel to `(27.8, 45.0)` | lower playfield | `physicalChannel` | entrance-to-exit only | 500 | Ball stays under normal table physics and may retry | 1 ball / 2.5 seconds |
+
 ### Step 8.2 — Build the first bone ramp
 
-- [ ] Use placeholder rails and guide colliders.
-- [ ] Add an entrance sensor.
-- [ ] Guide or constrain the ball through the ramp lane.
-- [ ] Add an exit sensor that returns the ball to the playfield.
-- [ ] Prevent the ball from escaping through the visual ramp walls.
-- [ ] Award the ramp score once per completed traversal.
+- [x] Use placeholder rails and guide colliders.
+- [x] Add an entrance sensor.
+- [x] Guide or constrain the ball through the ramp lane.
+- [x] Add an exit sensor that returns the ball to the playfield.
+- [x] Prevent the ball from escaping through the visual ramp walls.
+- [x] Award the ramp score once per completed traversal.
 
 **Done when:** the first ramp can be entered, traveled, exited, scored, and recovered from repeatedly.
 
