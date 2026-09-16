@@ -41,7 +41,7 @@ class LauncherControl extends PositionComponent with DragCallbacks {
           srcPosition: Vector2(204, 0),
           srcSize: Vector2(106, 300),
         ),
-        size: Vector2(size.x, size.x * 300 / 106),
+        size: Vector2(size.x, size.y * 300 / 512),
         anchor: Anchor.topLeft,
         paint: Paint()..filterQuality = FilterQuality.none,
       ),
@@ -53,7 +53,7 @@ class LauncherControl extends PositionComponent with DragCallbacks {
         srcSize: Vector2(106, 212),
       ),
       position: Vector2(0, size.y * 300 / 512),
-      size: Vector2(size.x, size.x * 212 / 106),
+      size: Vector2(size.x, size.y * 212 / 512),
       anchor: Anchor.topLeft,
       paint: Paint()..filterQuality = FilterQuality.none,
     );
