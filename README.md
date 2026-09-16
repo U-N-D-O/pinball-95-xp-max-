@@ -138,6 +138,8 @@ The GitHub Actions instructions for an unsigned iOS test IPA are in [IOS_UNSIGNE
 
 Hosted Flutter CI runs analysis and the complete test suite on pushes and pull requests targeting `main`.
 
+Hosted Windows validation also builds the release executable on pushes and pull requests; manual dispatch is available from the Actions tab.
+
 Possible business models:
 
 - Free demo with a paid full version

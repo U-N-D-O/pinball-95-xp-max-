@@ -16,6 +16,7 @@
 - [x] Manual GitHub Actions workflow is defined for an unsigned iOS test IPA.
 - [x] GitHub unsigned IPA workflow completed successfully and its artifact checksum was verified.
 - [x] Hosted GitHub CI workflow is configured for analysis and tests.
+- [x] Hosted Windows release-build validation is configured.
 - [x] Repeatable release pipeline is available at `game_app/tool/build_release.ps1`.
 
 ## Device QA
