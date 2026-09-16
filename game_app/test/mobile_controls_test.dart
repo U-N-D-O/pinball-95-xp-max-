@@ -29,6 +29,13 @@ void main() {
       launcher.position.x + launcher.size.x,
       closeTo(PinballGame.worldWidth, 0.0001),
     );
+    expect(TennisBall.renderPriority, greaterThan(launcher.priority));
+  });
+
+  test('a ball defaults to the visible launcher position', () {
+    final ball = TennisBall();
+
+    expect(ball.bodyDef!.position, TennisBall.launcherPosition);
   });
 
   test(

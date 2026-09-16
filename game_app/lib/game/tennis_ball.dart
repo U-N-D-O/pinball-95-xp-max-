@@ -8,7 +8,13 @@ import 'table_tuning.dart';
 
 class TennisBall extends BodyComponent<PinballGame> {
   static const double radius = 0.9;
-  static final Vector2 launcherPosition = Vector2(32.8, 58.5);
+  static const int renderPriority = 210;
+
+  // The launcher lane is drawn by LauncherControl at priority 200. Keep the
+  // ball above that decorative lane so the ready ball is visible to the
+  // player instead of being painted underneath the lane artwork.
+  static Vector2 get launcherPosition => Vector2(32.8, 58.5);
+
   bool _launched = false;
 
   bool get isReadyToLaunch => !_launched;
@@ -26,11 +32,12 @@ class TennisBall extends BodyComponent<PinballGame> {
         ],
         bodyDef: BodyDef(
           type: BodyType.dynamic,
-          position: initialPosition ?? Vector2(16, 17),
+          position: (initialPosition ?? launcherPosition).clone(),
           bullet: true,
           angularDamping: 0.35,
           linearDamping: TableTuning.ballLinearDamping,
         ),
+        priority: renderPriority,
       );
 
   @override
