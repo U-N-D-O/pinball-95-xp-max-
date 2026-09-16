@@ -21,6 +21,7 @@ This should be a spiritual successor, not a copy of any existing game. Use origi
 ## Development plans
 
 - [Game development plan](GAME_PLAN.md)
+- [Gameplay implementation plan](GAMEPLAY_IMPLEMENTATION_PLAN.md)
 - [Sprite and art plan](SPRITE_PLAN.md)
 - [Testing and improvement plan](TESTING_PLAN.md)
 

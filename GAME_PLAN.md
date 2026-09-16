@@ -97,3 +97,5 @@ Add and test features in this order:
 ## Scope Rule
 
 Every new feature must first be playable with placeholder art, then receive final art, audio, and polish after the gameplay works.
+
+The detailed, checkbox-based sequence for the missing ball loop, touch controls, bumpers, slingshots, ramps, habitrails, background, and device verification is in [GAMEPLAY_IMPLEMENTATION_PLAN.md](GAMEPLAY_IMPLEMENTATION_PLAN.md).
