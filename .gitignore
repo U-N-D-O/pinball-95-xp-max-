@@ -12,6 +12,9 @@ game_app/android/*.keystore
 game_app/ios/**/*.p12
 game_app/ios/**/*.mobileprovision
 
+# Downloaded CI artifacts
+ios_test_artifacts/
+
 # Editor and OS files
 .idea/
 .vscode/

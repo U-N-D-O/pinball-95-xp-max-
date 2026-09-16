@@ -14,6 +14,7 @@
 - [x] Settings switches expose usable labels to accessibility services.
 - [x] Release SHA-256 checksum manifest is generated for distributable binaries.
 - [x] Manual GitHub Actions workflow is defined for an unsigned iOS test IPA.
+- [x] GitHub unsigned IPA workflow completed successfully and its artifact checksum was verified.
 - [x] Repeatable release pipeline is available at `game_app/tool/build_release.ps1`.
 
 ## Device QA
