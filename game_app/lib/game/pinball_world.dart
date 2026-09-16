@@ -12,6 +12,7 @@ import 'hydrant_spinner.dart';
 import 'launcher.dart';
 import 'score_hud.dart';
 import 'scoring_target.dart';
+import 'slingshot.dart';
 import 'table_boundaries.dart';
 import 'tennis_ball.dart';
 import 'table_decorations.dart';
@@ -171,6 +172,8 @@ class PinballWorld extends Forge2DWorld {
     _addBumper(position: Vector2(16.0, 25.5), color: BumperColor.blue);
     _addBumper(position: Vector2(10.5, 29.0), color: BumperColor.blue);
     _addBumper(position: Vector2(21.5, 29.0), color: BumperColor.blue);
+    _addSlingshot(position: Vector2(8.5, 54.0), isLeft: true);
+    _addSlingshot(position: Vector2(27.5, 54.0), isLeft: false);
     for (final x in [8.8, 16.0, 23.2]) {
       add(
         ScoringTarget(
@@ -365,6 +368,21 @@ class PinballWorld extends Forge2DWorld {
           audio.play(PinballSound.bumper);
           haptics.medium();
           _shake(intensity: 0.16);
+        },
+      ),
+    );
+  }
+
+  void _addSlingshot({required Vector2 position, required bool isLeft}) {
+    add(
+      PinballSlingshot(
+        position: position,
+        isLeft: isLeft,
+        onScored: addScore,
+        onHitSound: () {
+          audio.play(PinballSound.bumper);
+          haptics.medium();
+          _shake(intensity: 0.1);
         },
       ),
     );

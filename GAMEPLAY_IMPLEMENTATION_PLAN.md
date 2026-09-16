@@ -386,22 +386,22 @@ The current launcher has tap-to-launch scaffolding. It must become a real press,
 
 ### Step 7.1 — Define slingshot behavior
 
-- [ ] Create left and right triangular slingshot collision regions above the flippers.
-- [ ] Define the active edge and the safe interior edge.
-- [ ] Apply an angled impulse away from the contact side and upward into play.
-- [ ] Add a short cooldown per slingshot.
-- [ ] Award score once per accepted activation.
-- [ ] Prevent the ball from being repeatedly trapped between a sling and wall.
+- [x] Create left and right triangular slingshot collision regions above the flippers.
+- [x] Define the active edge and the safe interior edge.
+- [x] Apply an angled impulse away from the contact side and upward into play.
+- [x] Add a short cooldown per slingshot.
+- [x] Award score once per accepted activation.
+- [x] Prevent the ball from being repeatedly trapped between a sling and wall.
 
 **Done when:** each sling provides a distinct, controllable kick and does not behave like a full bumper.
 
 ### Step 7.2 — Create slingshot sprites
 
-- [ ] Create a left-facing dog-park slingshot sprite.
-- [ ] Create a mirrored right-facing sprite.
+- [x] Create a left-facing dog-park slingshot sprite.
+- [x] Create a mirrored right-facing sprite.
 - [ ] Create idle, armed, hit, and cooldown frames.
-- [ ] Add chunky cream rubber, red end caps, navy outlines, and small paw accents.
-- [ ] Export the mirrored variant from the same source design where possible.
+- [x] Add chunky cream rubber, red end caps, navy outlines, and small paw accents.
+- [x] Export the mirrored variant from the same source design where possible.
 
 **Sprite prompt template:**
 

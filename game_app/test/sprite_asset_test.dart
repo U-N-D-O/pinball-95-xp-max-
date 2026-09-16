@@ -10,6 +10,7 @@ void main() {
     'assets/images/sprites/ball_tennis_idle.png',
     'assets/images/sprites/bumper_red.png',
     'assets/images/sprites/bumper_blue.png',
+    'assets/images/sprites/slingshot_left.png',
     'assets/images/sprites/doghouse_lane.png',
     'assets/images/sprites/paw_mission_target.png',
     'assets/images/sprites/chew_toy_red_ball.png',
