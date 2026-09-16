@@ -45,7 +45,7 @@ These marks describe source implementation progress. Final automated and device 
 - [ ] A drained ball is removed, a life is deducted, and the next turn is handled.
 - [x] Bumpers visibly and physically bounce the ball in source.
 - [x] Slingshots provide a distinct angled kick and readable feedback in source.
-- [ ] Ramps have working entrances, exits, sensors, and unique rules.
+- [x] Ramps have working entrances, exits, sensors, and unique rules.
 - [ ] Habitrails have working elevated routes and anti-stuck behavior.
 - [ ] The playfield has its complete background sprite and final composition.
 
@@ -445,6 +445,7 @@ Ramps must be implemented as real routes with a defined entry, travel path, exit
 |---|---|---|---|---|---|---:|---|---|
 | `ramp_a_bone_lane` | `(4.5, 45.0)` | physical two-rail channel to `(7.0, 12.5)` | upper playfield | `physicalChannel` | entrance-to-exit only | 500 | Ball stays under normal table physics and may retry | 1 ball / 2.5 seconds |
 | `ramp_b_return_lane` | `(22.5, 12.5)` | physical two-rail channel to `(27.8, 45.0)` | lower playfield | `physicalChannel` | entrance-to-exit only | 500 | Ball stays under normal table physics and may retry | 1 ball / 2.5 seconds |
+| `ramp_c_launcher_feed` | `(12.5, 50.0)` | controlled-transfer channel to `(32.2, 50.0)` | launcher lane | `controlledTransfer` | entrance-to-exit only | 500 | Ball stays under normal table physics and may retry | 1 ball / 2.5 seconds |
 
 ### Step 8.2 — Build the first bone ramp
 
@@ -461,7 +462,7 @@ Ramps must be implemented as real routes with a defined entry, travel path, exit
 
 - [x] Ramp A: award a dog-bone lane score and return the ball to the upper playfield.
 - [x] Ramp B: light one target or advance a target sequence.
-- [ ] Ramp C: feed the launcher lane or activate a temporary ball-save state.
+- [x] Ramp C: feed the launcher lane or activate a temporary ball-save state.
 - [x] Show the active outcome in the HUD.
 - [ ] Ensure each outcome can be tested independently.
 

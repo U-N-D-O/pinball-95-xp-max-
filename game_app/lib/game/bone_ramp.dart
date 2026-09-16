@@ -8,7 +8,7 @@ import 'pinball_game.dart';
 import 'table_tuning.dart';
 import 'tennis_ball.dart';
 
-enum BoneRampRouteType { physicalChannel }
+enum BoneRampRouteType { physicalChannel, controlledTransfer }
 
 /// A reusable sloped ramp contract.
 ///

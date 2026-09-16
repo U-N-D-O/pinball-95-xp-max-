@@ -156,6 +156,13 @@ class PinballWorld extends Forge2DWorld {
       end: Vector2(27.8, 45.0),
       accentColor: const Color(0xFF317BD0),
     );
+    _addBoneRamp(
+      id: 'ramp_c_launcher_feed',
+      start: Vector2(12.5, 50.0),
+      end: Vector2(32.2, 50.0),
+      accentColor: const Color(0xFF7BE2B2),
+      routeType: BoneRampRouteType.controlledTransfer,
+    );
     add(ball);
     add(leftFlipper);
     add(rightFlipper);
@@ -402,12 +409,14 @@ class PinballWorld extends Forge2DWorld {
     required Vector2 start,
     required Vector2 end,
     required Color accentColor,
+    BoneRampRouteType routeType = BoneRampRouteType.physicalChannel,
   }) {
     final ramp = BoneRamp(
       id: id,
       start: start,
       end: end,
       accentColor: accentColor,
+      routeType: routeType,
       onCompleted: _onRampCompleted,
       onTimedOut: (ramp, ball) {
         telemetry.record('ramp_timeout');
@@ -433,6 +442,11 @@ class PinballWorld extends Forge2DWorld {
       case 'ramp_b_return_lane':
         showRampOutcome('PAW ADVANCE');
         advancePawMissionFromRamp();
+        break;
+      case 'ramp_c_launcher_feed':
+        showRampOutcome('LAUNCH FEED');
+        ball.parkAtLauncher();
+        telemetry.record('ramp_c_launcher_feed');
         break;
     }
   }
