@@ -459,10 +459,10 @@ Ramps must be implemented as real routes with a defined entry, travel path, exit
 
 ### Step 8.3 — Add unique ramp outcomes
 
-- [ ] Ramp A: award a dog-bone lane score and return the ball to the upper playfield.
-- [ ] Ramp B: light one target or advance a target sequence.
+- [x] Ramp A: award a dog-bone lane score and return the ball to the upper playfield.
+- [x] Ramp B: light one target or advance a target sequence.
 - [ ] Ramp C: feed the launcher lane or activate a temporary ball-save state.
-- [ ] Show the active outcome in the HUD.
+- [x] Show the active outcome in the HUD.
 - [ ] Ensure each outcome can be tested independently.
 
 **Done when:** ramps are strategically different, not only visually different.

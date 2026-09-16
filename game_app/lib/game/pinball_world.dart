@@ -59,6 +59,8 @@ class PinballWorld extends Forge2DWorld {
   bool doghouseReady = false;
   bool waterBonusActive = false;
   double waterBonusTime = 0;
+  String? rampOutcomeMessage;
+  double rampOutcomeTime = 0;
   final Set<PinballAchievement> achievements = <PinballAchievement>{};
   String? achievementMessage;
   double achievementTime = 0;
@@ -215,6 +217,13 @@ class PinballWorld extends Forge2DWorld {
         waterBonusActive = false;
       }
     }
+    if (rampOutcomeTime > 0) {
+      rampOutcomeTime -= dt;
+      if (rampOutcomeTime <= 0) {
+        rampOutcomeTime = 0;
+        rampOutcomeMessage = null;
+      }
+    }
     if (achievementTime > 0) {
       achievementTime -= dt;
       if (achievementTime <= 0) {
@@ -335,6 +344,8 @@ class PinballWorld extends Forge2DWorld {
     doghouseReady = false;
     waterBonusActive = false;
     waterBonusTime = 0;
+    rampOutcomeMessage = null;
+    rampOutcomeTime = 0;
     _drainQueued = false;
     achievements.clear();
     achievementMessage = null;
@@ -413,6 +424,35 @@ class PinballWorld extends Forge2DWorld {
     haptics.medium();
     telemetry.record('ramp_completed', value: ramp.scoreValue);
     _shake(intensity: 0.13);
+
+    switch (ramp.id) {
+      case 'ramp_a_bone_lane':
+        showRampOutcome('BONE LANE');
+        telemetry.record('ramp_a_upper_return');
+        break;
+      case 'ramp_b_return_lane':
+        showRampOutcome('PAW ADVANCE');
+        advancePawMissionFromRamp();
+        break;
+    }
+  }
+
+  void advancePawMissionFromRamp() {
+    if (gameOver || pawMissionProgress >= 3) {
+      return;
+    }
+
+    pawMissionProgress++;
+    telemetry.record('ramp_b_paw_advance', value: pawMissionProgress);
+    if (pawMissionProgress == 3) {
+      doghouseReady = true;
+      unlockAchievement(PinballAchievement.pawPack, 'PAW PACK');
+    }
+  }
+
+  void showRampOutcome(String message) {
+    rampOutcomeMessage = message;
+    rampOutcomeTime = 1.5;
   }
 
   void unlockAchievement(PinballAchievement achievement, String message) {

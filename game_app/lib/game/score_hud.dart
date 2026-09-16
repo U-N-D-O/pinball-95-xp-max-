@@ -113,7 +113,8 @@ class ScoreHud extends PositionComponent with TapCallbacks {
       );
     }
 
-    if (world.achievementMessage case final message?) {
+    final statusMessage = world.rampOutcomeMessage ?? world.achievementMessage;
+    if (statusMessage case final message?) {
       final banner = Paint()
         ..color = const Color(0xEE0C1B29)
         ..isAntiAlias = false;
