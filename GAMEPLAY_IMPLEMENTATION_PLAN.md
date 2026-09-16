@@ -31,23 +31,31 @@ Testing is intentionally deferred while the feature set is being built. During i
 - [x] Touch input scaffolding exists for launcher and flipper zones.
 - [x] Android, iOS, and Windows build validation exists in the repository.
 
-### 1.2 What is not yet accepted as playable
+### 1.2 Implementation status
 
-- [ ] A visible ball appears in the correct launch-lane starting position on iPhone.
-- [ ] A new ball can be created reliably at the beginning of a turn.
-- [ ] Gravity, velocity, collision response, and bounce behavior feel like pinball.
-- [ ] The plunger can be pulled down by dragging and released to launch the ball.
-- [ ] Holding the left side of the screen holds the left flipper up.
-- [ ] Holding the right side of the screen holds the right flipper up.
-- [ ] Multi-touch allows both flippers to be held at the same time.
+These marks describe source implementation progress. Final automated and device verification is intentionally deferred until the implementation plan is complete.
+
+- [x] A visible ball is wired to the launch-lane starting position.
+- [x] A ball can be created and parked at the beginning of a turn.
+- [x] Gravity, velocity limits, collision response, and bounce tuning are implemented in source.
+- [x] The plunger can be pulled down by dragging and released to launch the ball.
+- [x] Holding the left side of the screen holds the left flipper up.
+- [x] Holding the right side of the screen holds the right flipper up.
+- [x] Multi-touch allows both flippers to be held at the same time.
 - [ ] A drained ball is removed, a life is deducted, and the next turn is handled.
-- [ ] Bumpers visibly and physically bounce the ball.
-- [ ] Slingshots provide a distinct angled kick and readable feedback.
+- [x] Bumpers visibly and physically bounce the ball in source.
+- [x] Slingshots provide a distinct angled kick and readable feedback in source.
 - [ ] Ramps have working entrances, exits, sensors, and unique rules.
 - [ ] Habitrails have working elevated routes and anti-stuck behavior.
 - [ ] The playfield has its complete background sprite and final composition.
 
-### 1.3 Immediate focus
+### 1.3 Final verification status
+
+- [ ] Install the completed implementation on iPhone and verify the full play loop.
+- [ ] Run the automated suite after all implementation phases are complete.
+- [ ] Run the Android, iOS, and Windows device/build matrix.
+
+### 1.4 Immediate focus
 
 The next playable milestone is not the complete art pass. It is the **Core Ball Loop**:
 
