@@ -45,6 +45,8 @@ class PinballWorld extends Forge2DWorld {
 
   late final PinballFlipper leftFlipper;
   late final PinballFlipper rightFlipper;
+  late final FlipperControlZone leftFlipperControl;
+  late final FlipperControlZone rightFlipperControl;
   late final TennisBall ball;
   late final LauncherControl launcher;
   int score = 0;
@@ -156,8 +158,13 @@ class PinballWorld extends Forge2DWorld {
     add(ball);
     add(leftFlipper);
     add(rightFlipper);
-    add(FlipperControlZone(flipper: leftFlipper, isLeft: true));
-    add(FlipperControlZone(flipper: rightFlipper, isLeft: false));
+    leftFlipperControl = FlipperControlZone(flipper: leftFlipper, isLeft: true);
+    rightFlipperControl = FlipperControlZone(
+      flipper: rightFlipper,
+      isLeft: false,
+    );
+    add(leftFlipperControl);
+    add(rightFlipperControl);
     add(launcher);
     add(
       Bumper(
@@ -373,6 +380,8 @@ class PinballWorld extends Forge2DWorld {
     if (!_worldLoaded) {
       return;
     }
+    leftFlipperControl.cancelActivePointers();
+    rightFlipperControl.cancelActivePointers();
     leftFlipper.setPressed(false);
     rightFlipper.setPressed(false);
   }

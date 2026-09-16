@@ -52,6 +52,36 @@ void main() {
     },
   );
 
+  test('flipper zone keeps holding while another pointer remains down', () {
+    final flipper = PinballFlipper(isLeft: true, pivot: Vector2(8, 58));
+    final zone = FlipperControlZone(flipper: flipper, isLeft: true);
+
+    zone.pressForPointer(1);
+    zone.pressForPointer(2);
+    zone.releaseForPointer(1);
+
+    expect(zone.activePointerCount, 1);
+    expect(flipper.isPressed, isTrue);
+
+    zone.releaseForPointer(2);
+    expect(zone.activePointerCount, 0);
+    expect(flipper.isPressed, isFalse);
+  });
+
+  test('flipper zone ignores an unrelated pointer release', () {
+    final flipper = PinballFlipper(isLeft: false, pivot: Vector2(28, 58));
+    final zone = FlipperControlZone(flipper: flipper, isLeft: false);
+
+    zone.pressForPointer(4);
+    zone.releaseForPointer(9);
+
+    expect(zone.activePointerCount, 1);
+    expect(flipper.isPressed, isTrue);
+
+    zone.cancelActivePointers();
+    expect(flipper.isPressed, isFalse);
+  });
+
   test('launcher touch action respects its launch gate', () {
     final launcher = LauncherControl(
       ball: TennisBall(),

@@ -110,6 +110,8 @@ class PinballFlipper extends BodyComponent<PinballGame> {
 
 class FlipperControlZone extends PositionComponent with TapCallbacks {
   final PinballFlipper flipper;
+  final Set<int> _activePointers = <int>{};
+  bool _manualPressed = false;
 
   FlipperControlZone({required this.flipper, required bool isLeft})
     : super(
@@ -123,25 +125,55 @@ class FlipperControlZone extends PositionComponent with TapCallbacks {
         priority: 100,
       );
 
-  void press() => flipper.setPressed(true);
+  int get activePointerCount => _activePointers.length;
 
-  void release() => flipper.setPressed(false);
+  // These methods are also useful for deterministic input tests and desktop
+  // adapters. Touch callbacks below route through the same pointer-owned
+  // state so one finger cannot release another finger's flipper.
+  void press() {
+    _manualPressed = true;
+    _syncPressedState();
+  }
+
+  void release() {
+    _manualPressed = false;
+    _syncPressedState();
+  }
+
+  void pressForPointer(int pointerId) {
+    _activePointers.add(pointerId);
+    _syncPressedState();
+  }
+
+  void releaseForPointer(int pointerId) {
+    _activePointers.remove(pointerId);
+    _syncPressedState();
+  }
+
+  void cancelActivePointers() {
+    _activePointers.clear();
+    _syncPressedState();
+  }
+
+  void _syncPressedState() {
+    flipper.setPressed(_manualPressed || _activePointers.isNotEmpty);
+  }
 
   @override
   void onTapDown(TapDownEvent event) {
-    press();
+    pressForPointer(event.pointerId);
     event.handled = true;
   }
 
   @override
   void onTapUp(TapUpEvent event) {
-    release();
+    releaseForPointer(event.pointerId);
     event.handled = true;
   }
 
   @override
   void onTapCancel(TapCancelEvent event) {
-    release();
+    releaseForPointer(event.pointerId);
     event.handled = true;
   }
 }
