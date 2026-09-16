@@ -136,6 +136,8 @@ Release binary checksums are generated in [release_legal/RELEASE_SHA256SUMS.txt]
 
 The GitHub Actions instructions for an unsigned iOS test IPA are in [IOS_UNSIGNED_BUILD.md](IOS_UNSIGNED_BUILD.md).
 
+Hosted Flutter CI runs analysis and the complete test suite on pushes and pull requests targeting `main`.
+
 Possible business models:
 
 - Free demo with a paid full version

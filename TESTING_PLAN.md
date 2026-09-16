@@ -4,6 +4,10 @@
 
 The game must be reliable, responsive, readable, fun, and smooth on phones while preserving crisp pixel art.
 
+## Hosted CI
+
+`.github/workflows/flutter-ci.yml` runs `flutter analyze` and the complete `flutter test` suite on every push to `main` and every pull request targeting `main`. It uses Flutter `3.47.4`, matching the iOS unsigned-build workflow and the project's Dart SDK requirement.
+
 ## Physics Testing
 
 Check every build for:
