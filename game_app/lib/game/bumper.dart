@@ -74,12 +74,36 @@ class Bumper extends BodyComponent<PinballGame> with ContactCallbacks {
   @override
   void beginContact(Object other, Contact contact) {
     if (other is TennisBall && registerHit()) {
-      final away = other.body.position - body.position;
-      if (away.length2 > 0) {
-        away.normalize();
-        other.body.applyLinearImpulse(away * TableTuning.bumperImpulse);
-      }
+      bounceBall(other);
     }
+  }
+
+  /// Gives the ball a definite outward kick after the normal Forge2D
+  /// restitution response. This prevents shallow bumper contacts from
+  /// stalling while the velocity cap keeps chains of hits under control.
+  void bounceBall(TennisBall other) {
+    final away = other.body.position - body.position;
+    if (away.length2 <= 0.000001) {
+      away.setValues(0, -1);
+    } else {
+      away.normalize();
+    }
+
+    final velocity = other.body.linearVelocity.clone();
+    final outwardSpeed = velocity.dot(away);
+    final requiredBoost = TableTuning.bumperMinimumOutwardSpeed - outwardSpeed;
+    if (requiredBoost > 0) {
+      velocity += away * requiredBoost;
+    }
+
+    other.body.linearVelocity = velocity;
+    // Keep a small impulse in the contact path so a nearly stationary ball
+    // still separates from the bumper immediately.
+    other.body.applyLinearImpulse(away * TableTuning.bumperImpulse);
+    other.body.linearVelocity = TennisBall.capVelocity(
+      other.body.linearVelocity,
+    );
+    other.body.setAwake(true);
   }
 
   bool registerHit() {

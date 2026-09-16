@@ -9,5 +9,6 @@ class TableTuning {
   static const double launcherMaxPullDistance = 2.4;
   static const double launcherMinimumPullDistance = 0.25;
   static const double bumperImpulse = 4.5;
+  static const double bumperMinimumOutwardSpeed = 8.0;
   static const double railRestitution = 0.76;
 }

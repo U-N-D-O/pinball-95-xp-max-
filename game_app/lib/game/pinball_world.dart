@@ -166,42 +166,11 @@ class PinballWorld extends Forge2DWorld {
     add(leftFlipperControl);
     add(rightFlipperControl);
     add(launcher);
-    add(
-      Bumper(
-        position: Vector2(10.5, 17.5),
-        color: BumperColor.red,
-        onScored: addScore,
-        onHitSound: () {
-          audio.play(PinballSound.bumper);
-          haptics.medium();
-          _shake(intensity: 0.16);
-        },
-      ),
-    );
-    add(
-      Bumper(
-        position: Vector2(21.5, 17.5),
-        color: BumperColor.red,
-        onScored: addScore,
-        onHitSound: () {
-          audio.play(PinballSound.bumper);
-          haptics.medium();
-          _shake(intensity: 0.16);
-        },
-      ),
-    );
-    add(
-      Bumper(
-        position: Vector2(16.0, 25.5),
-        color: BumperColor.blue,
-        onScored: addScore,
-        onHitSound: () {
-          audio.play(PinballSound.bumper);
-          haptics.medium();
-          _shake(intensity: 0.16);
-        },
-      ),
-    );
+    _addBumper(position: Vector2(10.5, 17.5), color: BumperColor.red);
+    _addBumper(position: Vector2(21.5, 17.5), color: BumperColor.red);
+    _addBumper(position: Vector2(16.0, 25.5), color: BumperColor.blue);
+    _addBumper(position: Vector2(10.5, 29.0), color: BumperColor.blue);
+    _addBumper(position: Vector2(21.5, 29.0), color: BumperColor.blue);
     for (final x in [8.8, 16.0, 23.2]) {
       add(
         ScoringTarget(
@@ -384,6 +353,21 @@ class PinballWorld extends Forge2DWorld {
     rightFlipperControl.cancelActivePointers();
     leftFlipper.setPressed(false);
     rightFlipper.setPressed(false);
+  }
+
+  void _addBumper({required Vector2 position, required BumperColor color}) {
+    add(
+      Bumper(
+        position: position,
+        color: color,
+        onScored: addScore,
+        onHitSound: () {
+          audio.play(PinballSound.bumper);
+          haptics.medium();
+          _shake(intensity: 0.16);
+        },
+      ),
+    );
   }
 
   void unlockAchievement(PinballAchievement achievement, String message) {

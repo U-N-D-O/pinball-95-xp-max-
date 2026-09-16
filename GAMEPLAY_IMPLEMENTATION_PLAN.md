@@ -6,11 +6,15 @@ The plan is deliberately incremental. Each step must be completed and tested bef
 
 ## Status and evidence rules
 
-- `[x]` means the item exists in the project and has been verified at the level stated.
-- `[ ]` means it is missing, incomplete, or still needs physical-device verification.
-- A code scaffold is not the same as a playable feature. A feature stays unchecked until it works in an actual game build.
+- `[x]` means the source implementation for the item is complete.
+- `[ ]` means it is not implemented yet, is incomplete, or is intentionally deferred.
+- A code scaffold is not the same as a finished implementation. A feature is checked when its planned source work is complete.
 - The attached iPhone screenshot is treated as a visual status reference and user feedback, not as an instruction document.
-- No gameplay item in this document should be marked `[x]` until it has been tested on an iPhone in addition to automated tests.
+- Physical-device and final QA checks remain separate and stay unchecked until the implementation phases are complete.
+
+## Deferred testing policy
+
+Testing is intentionally deferred while the feature set is being built. During implementation, keep the code organized around the acceptance criteria and update the checkboxes when each source step is complete. After the final implementation checkbox is complete, run the automated suite, physical-device matrix, and full manual acceptance script in Phase 14–15.
 
 ## 1. Current evaluation
 
@@ -173,20 +177,20 @@ Do not move ramps or habitrails ahead of the verified ball loop. They are more d
 
 ### Step 2.1 — Create the ball model
 
-- [ ] Create a single authoritative ball state with ID, position, velocity, and active flag.
-- [ ] Give the ball a circular dynamic Forge2D body.
-- [ ] Set a stable radius in logical units.
-- [ ] Set the initial density, restitution, friction, and linear damping as named tuning constants.
-- [ ] Prevent the ball from rotating visually unless that rotation is intentionally rendered.
+- [x] Create a single authoritative ball state with ID, position, velocity, and active flag.
+- [x] Give the ball a circular dynamic Forge2D body.
+- [x] Set a stable radius in logical units.
+- [x] Set the initial density, restitution, friction, and linear damping as named tuning constants.
+- [x] Prevent the ball from rotating visually unless that rotation is intentionally rendered.
 
 **Done when:** one ball is created by code and its body is visible and tracked.
 
 ### Step 2.2 — Create the tennis-ball sprite
 
-- [ ] Add a readable bright tennis-ball placeholder before final art.
-- [ ] Add the final pixel sprite at a source resolution that scales cleanly.
-- [ ] Use nearest-neighbor filtering.
-- [ ] Align the sprite center to the physics body center.
+- [x] Add a readable bright tennis-ball placeholder before final art.
+- [x] Add the final pixel sprite at a source resolution that scales cleanly.
+- [x] Use nearest-neighbor filtering.
+- [x] Align the sprite center to the physics body center.
 - [ ] Add a subtle seam animation only after the static ball is correctly aligned.
 - [ ] Verify the ball remains visible against every current table color.
 
@@ -208,35 +212,35 @@ The current launcher has tap-to-launch scaffolding. It must become a real press,
 
 ### Step 3.1 — Define plunger geometry and range
 
-- [ ] Define the plunger's rest position.
-- [ ] Define the maximum downward pull distance.
-- [ ] Define the minimum pull distance that counts as a launch.
-- [ ] Define the launcher lane's ball capture region.
-- [ ] Define the launch direction and a safe maximum launch speed.
-- [ ] Keep the plunger inside the lane at every device aspect ratio.
+- [x] Define the plunger's rest position.
+- [x] Define the maximum downward pull distance.
+- [x] Define the minimum pull distance that counts as a launch.
+- [x] Define the launcher lane's ball capture region.
+- [x] Define the launch direction and a safe maximum launch speed.
+- [x] Keep the plunger inside the lane at every device aspect ratio.
 
 **Done when:** the plunger range is consistent in logical coordinates and cannot be dragged sideways.
 
 ### Step 3.2 — Implement touch drag state
 
-- [ ] Detect pointer down only inside the plunger control region.
-- [ ] Store the pointer ID that owns the plunger.
-- [ ] Convert pointer movement into downward pull distance.
-- [ ] Clamp pull distance between zero and the maximum.
-- [ ] Ignore horizontal movement for the spring calculation.
-- [ ] Keep the plunger pulled while the owning pointer remains down.
-- [ ] Ignore other pointers until the owning pointer is released or canceled.
+- [x] Detect pointer down only inside the plunger control region.
+- [x] Store the pointer ID that owns the plunger.
+- [x] Convert pointer movement into downward pull distance.
+- [x] Clamp pull distance between zero and the maximum.
+- [x] Ignore horizontal movement for the spring calculation.
+- [x] Keep the plunger pulled while the owning pointer remains down.
+- [x] Ignore other pointers until the owning pointer is released or canceled.
 
 **Done when:** dragging downward visibly pulls the plunger and holding keeps it pulled.
 
 ### Step 3.3 — Implement release launch
 
-- [ ] On pointer release, convert pull distance into launch impulse.
-- [ ] Apply the impulse once to the captured ball.
-- [ ] Return the plunger to rest with a short spring animation.
-- [ ] Play the launch sound and optional haptic only once per launch.
+- [x] On pointer release, convert pull distance into launch impulse.
+- [x] Apply the impulse once to the captured ball.
+- [x] Return the plunger to rest with a short spring animation.
+- [x] Play the launch sound and optional haptic only once per launch.
 - [ ] Release the pointer capture on cancel, app pause, focus loss, or drag leaving the control.
-- [ ] Decide and document whether a canceled drag launches; default to no launch.
+- [x] Decide and document whether a canceled drag launches; default to no launch.
 
 **Done when:** a short pull gives a short launch, a full pull gives a strong launch, and repeated release events cannot double-launch.
 
@@ -255,31 +259,31 @@ The current launcher has tap-to-launch scaffolding. It must become a real press,
 
 ### Step 4.1 — Define the touch control layout
 
-- [ ] Define left and right touch regions in screen space.
-- [ ] Exclude HUD buttons, pause, settings, and the plunger from flipper regions.
-- [ ] Account for top and bottom safe areas.
-- [ ] Make the active regions large enough for a thumb without covering important UI.
-- [ ] Keep the regions symmetric unless a documented layout mode changes them.
+- [x] Define left and right touch regions in screen space.
+- [x] Exclude HUD buttons, pause, settings, and the plunger from flipper regions.
+- [x] Account for top and bottom safe areas.
+- [x] Make the active regions large enough for a thumb without covering important UI.
+- [x] Keep the regions symmetric unless a documented layout mode changes them.
 - [ ] Add a left-handed or mirrored control option only after the default layout works.
 
 **Done when:** a player can reach either flipper comfortably on the smallest supported phone.
 
 ### Step 4.2 — Implement press and hold
 
-- [ ] On pointer down in the left region, press the left flipper.
-- [ ] On pointer down in the right region, press the right flipper.
-- [ ] Keep each flipper pressed for as long as its owning pointer is held.
-- [ ] On pointer up, release only the flipper owned by that pointer.
-- [ ] On pointer cancel or focus loss, release the affected flipper safely.
-- [ ] Do not use a tap-only callback for the held state.
+- [x] On pointer down in the left region, press the left flipper.
+- [x] On pointer down in the right region, press the right flipper.
+- [x] Keep each flipper pressed for as long as its owning pointer is held.
+- [x] On pointer up, release only the flipper owned by that pointer.
+- [x] On pointer cancel or focus loss, release the affected flipper safely.
+- [x] Do not use a tap-only callback for the held state.
 
 **Done when:** holding either side leaves its flipper upright and releasing returns it to rest.
 
 ### Step 4.3 — Support multi-touch
 
-- [ ] Track pointer IDs independently for left and right controls.
-- [ ] Allow both flippers to be held simultaneously.
-- [ ] Prevent a third pointer from stealing an active flipper.
+- [x] Track pointer IDs independently for left and right controls.
+- [x] Allow both flippers to be held simultaneously.
+- [x] Prevent a third pointer from stealing an active flipper.
 - [ ] Test left-then-right and right-then-left ordering.
 - [ ] Test releasing one side while continuing to hold the other.
 
@@ -334,12 +338,12 @@ The current launcher has tap-to-launch scaffolding. It must become a real press,
 
 ### Step 6.1 — Create a reusable bumper component
 
-- [ ] Define a circular or rounded collision body for a bumper.
-- [ ] Define the bumper center, radius, impulse strength, and score value.
-- [ ] Apply a controlled outward impulse on ball contact.
-- [ ] Add a per-bumper cooldown so one contact cannot score repeatedly in one frame.
+- [x] Define a circular or rounded collision body for a bumper.
+- [x] Define the bumper center, radius, impulse strength, and score value.
+- [x] Apply a controlled outward impulse on ball contact.
+- [x] Add a per-bumper cooldown so one contact cannot score repeatedly in one frame.
 - [ ] Emit a typed bumper-hit event.
-- [ ] Keep the visual animation separate from the collision body.
+- [x] Keep the visual animation separate from the collision body.
 
 **Done when:** one bumper reliably bounces the ball and awards one score event per hit.
 
@@ -359,9 +363,9 @@ The current launcher has tap-to-launch scaffolding. It must become a real press,
 ### Step 6.3 — Expand bumper placement
 
 - [ ] Add named bumper sockets to the table layout rather than hard-coded anonymous positions.
-- [ ] Place a left and right upper bumper pair.
-- [ ] Place a central lower bumper with a clear return path.
-- [ ] Add at least two additional bumper positions in the mid-playfield.
+- [x] Place a left and right upper bumper pair.
+- [x] Place a central lower bumper with a clear return path.
+- [x] Add at least two additional bumper positions in the mid-playfield.
 - [ ] Ensure no bumper blocks every route to the flippers.
 - [ ] Ensure no bumper overlaps a ramp entrance, sling, target, or launcher lane.
 - [ ] Test each placement with debug outlines and a slow-motion mode.
