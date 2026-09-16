@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pinball_neo_95/game/flipper.dart';
 import 'package:pinball_neo_95/game/launcher.dart';
 import 'package:pinball_neo_95/game/pinball_game.dart';
+import 'package:pinball_neo_95/game/table_tuning.dart';
 import 'package:pinball_neo_95/game/tennis_ball.dart';
 
 void main() {
@@ -58,5 +59,32 @@ void main() {
     );
 
     expect(() => launcher.launch(), returnsNormally);
+  });
+
+  test('launcher pull is clamped, pointer-owned, and canceled safely', () {
+    final launcher = LauncherControl(ball: TennisBall(), canLaunch: () => true);
+
+    launcher.beginPull(7);
+    launcher.updatePull(99, 100);
+    expect(launcher.pullDistance, 0);
+
+    launcher.updatePull(7, 100);
+    expect(launcher.pullDistance, TableTuning.launcherMaxPullDistance);
+    expect(launcher.pullRatio, 1);
+
+    launcher.endPull(7, canceled: true);
+    expect(launcher.isPulling, isFalse);
+    expect(launcher.pullDistance, 0);
+  });
+
+  test('a short pull does not launch until the minimum pull is reached', () {
+    final ball = TennisBall();
+    final launcher = LauncherControl(ball: ball, canLaunch: () => true);
+
+    launcher.beginPull(3);
+    launcher.updatePull(3, TableTuning.launcherMinimumPullDistance / 2);
+    launcher.endPull(3);
+
+    expect(ball.isReadyToLaunch, isTrue);
   });
 }

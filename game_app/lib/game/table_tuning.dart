@@ -5,6 +5,9 @@ class TableTuning {
   static const double ballMaxSpeed = 34.0;
   static const double launcherHorizontalSpeed = -4.5;
   static const double launcherVerticalSpeed = -26.0;
+  static const double launcherMinimumStrength = 0.55;
+  static const double launcherMaxPullDistance = 2.4;
+  static const double launcherMinimumPullDistance = 0.25;
   static const double bumperImpulse = 4.5;
   static const double railRestitution = 0.76;
 }

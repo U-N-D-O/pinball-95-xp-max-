@@ -82,17 +82,21 @@ class TennisBall extends BodyComponent<PinballGame> {
     _launched = false;
   }
 
-  void launch() {
+  void launch({double strength = 1.0}) {
     if (_launched) {
       return;
     }
 
+    final launchStrength = strength.clamp(0.0, 1.0).toDouble();
+    final effectiveStrength =
+        TableTuning.launcherMinimumStrength +
+        ((1.0 - TableTuning.launcherMinimumStrength) * launchStrength);
     body.setTransform(Vector2(28.5, 54.0), 0);
     body.gravityScale = Vector2.all(1);
     body.setAwake(true);
     body.linearVelocity = Vector2(
-      TableTuning.launcherHorizontalSpeed,
-      TableTuning.launcherVerticalSpeed,
+      TableTuning.launcherHorizontalSpeed * effectiveStrength,
+      TableTuning.launcherVerticalSpeed * effectiveStrength,
     );
     _launched = true;
   }
