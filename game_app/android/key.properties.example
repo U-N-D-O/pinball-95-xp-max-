@@ -1,0 +1,7 @@
+# Copy this file to android/key.properties and replace every placeholder.
+# The real key.properties file is ignored and must never be committed.
+
+storePassword=<keystore-password>
+keyPassword=<key-password>
+keyAlias=<release-key-alias>
+storeFile=<absolute-path-to-release-keystore>

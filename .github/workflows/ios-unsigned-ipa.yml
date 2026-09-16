@@ -1,0 +1,58 @@
+name: iOS unsigned test IPA
+
+on:
+  workflow_dispatch:
+    inputs:
+      flutter-version:
+        description: Flutter stable version
+        required: true
+        default: '3.41.5'
+
+jobs:
+  build-unsigned-ipa:
+    runs-on: macos-14
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ inputs.flutter-version }}
+          cache: true
+
+      - name: Analyze and test
+        working-directory: game_app
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+
+      - name: Build unsigned iOS app
+        working-directory: game_app
+        run: flutter build ios --release --no-codesign
+
+      - name: Package unsigned IPA
+        working-directory: game_app
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build/unsigned_ipa
+          mkdir -p build/unsigned_ipa/Payload
+          cp -R build/ios/iphoneos/Runner.app build/unsigned_ipa/Payload/Runner.app
+          cd build/unsigned_ipa
+          /usr/bin/zip -qry ../pinball_neo_95-unsigned.ipa Payload
+          shasum -a 256 ../pinball_neo_95-unsigned.ipa > ../pinball_neo_95-unsigned.ipa.sha256
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinball-neo-95-ios-unsigned
+          path: |
+            game_app/build/pinball_neo_95-unsigned.ipa
+            game_app/build/pinball_neo_95-unsigned.ipa.sha256
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,20 @@
+# Flutter and platform build output
+game_app/build/
+game_app/.dart_tool/
+game_app/.pub/
+game_app/.flutter-plugins-dependencies
+game_app/ios/Flutter/.last_build_id
+
+# Local signing material
+game_app/android/key.properties
+game_app/android/*.jks
+game_app/android/*.keystore
+game_app/ios/**/*.p12
+game_app/ios/**/*.mobileprovision
+
+# Editor and OS files
+.idea/
+.vscode/
+*.iml
+*.log
+.DS_Store
