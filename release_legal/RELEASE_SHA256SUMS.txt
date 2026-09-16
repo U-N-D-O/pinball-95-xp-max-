@@ -4,4 +4,4 @@ Verify each artifact with SHA-256 before uploading or distributing it.
 
 632b49ad05c356311390df7b3991512835839eaca720951d2fcfabe83dbc9bfa  build/app/outputs/flutter-apk/app-release.apk
 711df4421083b5851b82a9c8ee541d7a234f06ad0719db56118f9e3454c249aa  build/app/outputs/bundle/release/app-release.aab
-04a7a11e4e42282d9e1f9b4cf9d9f357258240f036fb1105a57a22532c7247e1  build/windows/x64/runner/Release/pinball_neo_95.exe
+53d945696356a64dfa764a3d74542c187210642c581331fc22802f871c22c3a6  build/windows/x64/runner/Release/pinball_neo_95.exe
