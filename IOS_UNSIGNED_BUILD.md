@@ -8,7 +8,7 @@ The repository contains a manual GitHub Actions workflow for producing an unsign
 
 1. Open the repository on GitHub.
 2. Open **Actions** and select **iOS unsigned test IPA**.
-3. Choose **Run workflow** and keep the pinned Flutter version unless the project is intentionally upgraded.
+3. Choose **Run workflow** and keep the pinned Flutter version (`3.47.4`) unless the project is intentionally upgraded.
 4. Download the `pinball-neo-95-ios-unsigned` artifact from the completed workflow run.
 5. Verify the IPA with the included `.sha256` file before moving it to a test device.
 

@@ -6,7 +6,7 @@ on:
       flutter-version:
         description: Flutter stable version
         required: true
-        default: '3.41.5'
+        default: '3.47.4'
 
 jobs:
   build-unsigned-ipa:
